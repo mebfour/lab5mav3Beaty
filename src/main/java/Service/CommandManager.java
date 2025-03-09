@@ -1,0 +1,39 @@
+package Service;
+
+import Commands.*;
+
+import java.util.HashMap;
+import java.util.Map;
+
+
+public class CommandManager {
+    public static Map<String, Command> commandList = new HashMap<>();
+
+    static {
+        commandList.put("add", new AddCommand());
+        commandList.put("info", new InfoCommand());
+        commandList.put("show", new ShowCommand());
+        commandList.put("exit", new ExitCommand());
+        commandList.put("insertNull", new InsernNull());
+        commandList.put("updateId", new UpdateID());
+        commandList.put("help", new HelpCommand());
+        commandList.put("removeByKey", new RemoveByKey());
+        commandList.put("clear", new Clear());
+    }
+    public static void checkComm (String inp){
+        String[] inpWords = inp.split(" ");
+        String commandName = inpWords[0];
+
+        Command command = commandList.get(commandName);
+            if (command != null){
+                command.execute(inpWords);
+            }else {
+                System.out.println("Такой команды нет, давайте попробуем другой набор символов");
+            }
+
+
+    }
+
+
+}
+
