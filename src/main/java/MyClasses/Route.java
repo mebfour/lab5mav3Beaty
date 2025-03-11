@@ -163,13 +163,14 @@ public class Route {
 
     public String toString() {
         String info = "";
+        info += "\n Ключ: " + key;
         info += "\n Имя: " + name;
         info += "\n Координаты: " + coordinates;
-        //info += "\n (добавлен " + creationDate.toString() + ")";
         String date = creationDate.toString();
         info += '\n'+"Добавлен "+date.substring(0, 10)+" "+date.substring(11, 19)+'\n';
         info += "\n Куда " + to;
         info += "\n Откуда " + from;
+        info += "\n Расстояние "+ distance;
         info += "\n id: " + id+ '\n' + "=========================================";;
         return info;
     }

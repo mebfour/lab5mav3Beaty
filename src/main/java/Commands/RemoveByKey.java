@@ -16,7 +16,7 @@ public class RemoveByKey implements Command {
 
     @Override
     public String getDescription() {
-        return "";
+        return "удаляет элемент из коллекции по его ключу";
     }
 
 

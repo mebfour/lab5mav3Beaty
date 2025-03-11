@@ -14,11 +14,17 @@ public class CommandManager {
         commandList.put("info", new InfoCommand());
         commandList.put("show", new ShowCommand());
         commandList.put("exit", new ExitCommand());
-        commandList.put("insertNull", new InsernNull());
+        commandList.put("insertNull", new InsertNull());
         commandList.put("updateId", new UpdateID());
         commandList.put("help", new HelpCommand());
         commandList.put("removeByKey", new RemoveByKey());
         commandList.put("clear", new Clear());
+        commandList.put("removeGreater", new RemoveGreater());
+        commandList.put("removeLower", new RemoveLower());
+        commandList.put("replaceIfLowe", new ReplaceIfLowe());
+        commandList.put("minByName", new MinByName());
+        commandList.put("maxById", new MaxByID());
+        commandList.put("filter_greater_than_distance", new FilterGreaterThanDistance());
     }
     public static void checkComm (String inp){
         String[] inpWords = inp.split(" ");

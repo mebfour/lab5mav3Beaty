@@ -170,6 +170,7 @@ public class inputName {
 
         route.setFrom(locationFrom);
 
+
         while (true) {
             try {
                 System.out.print("    Введите расстояние: ");
@@ -180,7 +181,6 @@ public class inputName {
                 System.out.println("Нужно ввести число.");
             }
         }
-
 
         collectionManager.addToCollection(route);
         System.out.println("Добавлен в коллекцию!");
