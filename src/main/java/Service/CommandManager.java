@@ -1,6 +1,8 @@
 package Service;
 
 import Commands.*;
+import Commands.XmlProcessing.ExecuteScriptFileName;
+import Commands.XmlProcessing.SaveCommand;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,6 +26,8 @@ public class CommandManager {
         commandList.put("replaceIfLowe", new ReplaceIfLowe());
         commandList.put("minByName", new MinByName());
         commandList.put("maxById", new MaxByID());
+        commandList.put("save", new SaveCommand());
+        commandList.put("execute_script_file_name", new ExecuteScriptFileName());
         commandList.put("filter_greater_than_distance", new FilterGreaterThanDistance());
     }
     public static void checkComm (String inp){

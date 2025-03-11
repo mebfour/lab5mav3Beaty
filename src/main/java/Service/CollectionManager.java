@@ -1,11 +1,14 @@
 package Service;
 
 import MyClasses.Route;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+
 import java.time.ZonedDateTime;
 import java.util.LinkedHashMap;
 
 
-
+@XmlRootElement(name = "routeList")
 public class CollectionManager {
 
 
@@ -17,17 +20,12 @@ public class CollectionManager {
     }
     public CollectionManager(){};
 
-
-
     public void addToCollection(Route route){
-
         try {
-
             routeList.put(route.getKey(), route);
         }catch (Exception e){
             routeList.put(route.getName(),route);
         }
-
 
     }
     public static Class<?> getCollectionType(){
@@ -38,6 +36,8 @@ public class CollectionManager {
         return initializationTime;
     }
 
+
+    @XmlElement(name="route")
     public LinkedHashMap getCollection() {
         return routeList;
     }
