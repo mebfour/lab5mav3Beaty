@@ -1,7 +1,7 @@
 package Service;
 
 import Commands.*;
-import Commands.XmlProcessing.ExecuteScriptFileName;
+import Commands.XmlProcessing.ExecuteScript;
 import Commands.XmlProcessing.SaveCommand;
 
 import java.util.HashMap;
@@ -12,6 +12,7 @@ public class CommandManager {
     public static Map<String, Command> commandList = new HashMap<>();
 
     static {
+
         commandList.put("add", new AddCommand());
         commandList.put("info", new InfoCommand());
         commandList.put("show", new ShowCommand());
@@ -27,7 +28,7 @@ public class CommandManager {
         commandList.put("minByName", new MinByName());
         commandList.put("maxById", new MaxByID());
         commandList.put("save", new SaveCommand());
-        commandList.put("execute_script_file_name", new ExecuteScriptFileName());
+        commandList.put("execute_script", new ExecuteScript());
         commandList.put("filter_greater_than_distance", new FilterGreaterThanDistance());
     }
     public static void checkComm (String inp){
