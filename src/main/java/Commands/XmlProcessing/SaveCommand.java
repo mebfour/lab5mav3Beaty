@@ -8,6 +8,7 @@ import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Marshaller;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.LinkedHashMap;
 
 import static Service.CollectionManager.routeList;
@@ -46,12 +47,22 @@ public class SaveCommand implements Command {
                 parentDir.mkdirs(); // Создаём директорию, если её нет
             }
 
+            if (file.exists()) {
+                file.delete(); // Удаляем существующий файл
+            }
+            // Создаём новый файл
+            if (file.createNewFile()) {
+                System.out.println("Файл создан: " + filePath);
+            } else {
+                System.out.println("Файл уже существует, но был удалён и создан заново.");
+            }
+
             // Сохраняем коллекцию в XML-файл
             marshaller.marshal(wrapper, file);
 
             System.out.println("Коллекция успешно сохранена в файл: " + filePath);
-        } catch (JAXBException e) {
-            e.printStackTrace();
+        } catch (JAXBException | IOException e) {
+            //e.printStackTrace();
             System.out.println("Ошибка сохранения в файл.");
         }
     }

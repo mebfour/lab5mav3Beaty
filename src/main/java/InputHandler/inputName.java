@@ -6,7 +6,10 @@ import MyClasses.Route;
 import Service.CollectionManager;
 
 
+import java.util.Map;
 import java.util.Scanner;
+
+import static Service.CollectionManager.routeList;
 
 public class inputName {
 
@@ -17,14 +20,18 @@ public class inputName {
         String key = scanner.nextLine();
         route.setKey(key);
     }
-    public static void updateID(Route route){
+
+    public static String findKeyById(InputProvider inputProvider) {
         Scanner scanner = new Scanner(System.in);
         while (true) {
             try {
-                System.out.print("Введите id: ");
-                int id = Integer.parseInt(scanner.nextLine());
-                route.setId(id);
-                break;
+                int id = inputProvider.readInt("Введите y:", -100000);
+                for (Map.Entry<String, Route> entry : routeList.entrySet()) {
+                    if (entry.getValue().getId() == id) {
+                        return entry.getKey();
+                    }
+                }
+                System.out.println("Элемент с таким id не найден.");
             } catch (NumberFormatException e) {
                 System.out.println("Нужно ввести целое число.");
             }
@@ -33,8 +40,11 @@ public class inputName {
 
     public static void sthName(Route route, InputProvider inputProvider) {
         // Устанавливаем название
-        route.setName(inputProvider.readString("Введите название:"));
 
+        route.setName(inputProvider.readString("Введите название:"));
+        if (route.getKey()==null){
+            route.setKey(route.getName());
+        }
         // Устанавливаем координаты
         Coordinates coordinates = new Coordinates();
         coordinates.setX(inputProvider.readLong("Введите x:", -326));

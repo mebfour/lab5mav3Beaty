@@ -14,6 +14,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 
+import static Service.CollectionManager.routeList;
+
 public class ExecuteScript implements Command {
 
     @Override
@@ -38,20 +40,40 @@ public class ExecuteScript implements Command {
                         continue;
                     }
                     // Выполняем команду
-
+                    InputProvider inputProvider = new ScriptInputProvider(reader);
                     switch (line) {
-                        case ("add"):
-                            InputProvider inputProvider = new ScriptInputProvider(reader);
+                        case ("execute_script"):
+                            System.out.println("Рекурсия нынче запрещена!");
+                            break;
+                        case ("add"): {
                             Route rn = new Route();
                             inputName.sthName(rn, inputProvider);
                             break;
+                        }
+                        case ("insertNull"):
+                            {
+                                Route rn = new Route();
+                                inputName.inputKey(rn);
+                                inputName.sthName(rn, inputProvider);
+                                routeList.put(rn.getKey(), rn);
+                                break;
+                            }
+                        case ("updateId"):
+                            {
+                                String k =inputName.findKeyById(inputProvider);
+                                Route rn = routeList.get(k);
+                                inputName.sthName(rn, inputProvider);
+                                routeList.put(rn.getName(),rn);
+                                break;
+                            }
                         default:
-                            commandManager.checkComm(line);
+                            CommandManager.checkComm(line);
                             break;
+
                     }
 
                 }
-
+                break;
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } catch (StackOverflowError e) {

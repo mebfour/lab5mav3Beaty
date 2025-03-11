@@ -12,8 +12,8 @@ public class UpdateID extends AddCommand{
     @Override
     public void execute(String[] args) {
         InputProvider inputProvider = new KeyboardInputProvider();
-        Route rn = new Route();
-        inputName.updateID(rn);
+        String k =inputName.findKeyById(inputProvider);
+        Route rn = routeList.get(k);
         inputName.sthName(rn, inputProvider);
         routeList.put(rn.getName(),rn);
     }
