@@ -42,9 +42,9 @@ public class ExecuteScript implements Command {
                     // Выполняем команду
                     InputProvider inputProvider = new ScriptInputProvider(reader);
                     switch (line) {
-                        case ("execute_script"):
-                            System.out.println("Рекурсия нынче запрещена!");
-                            break;
+//                        case ("execute_script"):
+//                            System.out.println("Рекурсия нынче запрещена!");
+//                            break;
                         case ("add"): {
                             Route rn = new Route();
                             inputName.sthName(rn, inputProvider);

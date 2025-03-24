@@ -22,7 +22,6 @@ public class inputName {
     }
 
     public static String findKeyById(InputProvider inputProvider) {
-        Scanner scanner = new Scanner(System.in);
         while (true) {
             try {
                 int id = inputProvider.readInt("Введите y:", -100000);

@@ -27,9 +27,11 @@ import static Service.CollectionManager.routeList;
 public class SaveCommand implements Command {
     @Override
     public void execute(String[] args) {
+        LinkedHashMap<String, Route> routeMap = routeList;
+        String filePath = "src\\main\\java\\files\\file.xml";
+        File file1 = new File(filePath);
+
         try {
-            LinkedHashMap<String, Route> routeMap = routeList;
-            String filePath = "src\\main\\java\\files\\file.xml";
             // Создаём обёртку для коллекции
             RouteWrapper wrapper = new RouteWrapper(routeMap);
 
@@ -42,6 +44,7 @@ public class SaveCommand implements Command {
 
             // Проверяем, существует ли директория
             File file = new File(filePath);
+
             File parentDir = file.getParentFile();
             if (parentDir != null && !parentDir.exists()) {
                 parentDir.mkdirs(); // Создаём директорию, если её нет
@@ -62,7 +65,8 @@ public class SaveCommand implements Command {
 
             System.out.println("Коллекция успешно сохранена в файл: " + filePath);
         } catch (JAXBException | IOException e) {
-            //e.printStackTrace();
+            e.printStackTrace();
+
             System.out.println("Ошибка сохранения в файл.");
         }
     }
