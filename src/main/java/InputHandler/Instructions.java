@@ -11,6 +11,8 @@ public class Instructions {
         System.out.println("P.S. Если Вы не знаете, какую команду ввести, наберите \"help\" ");
 
 
+
+
         while (true){
             Scanner scanner = new Scanner(System.in);
             System.out.println("Введите команду: ");

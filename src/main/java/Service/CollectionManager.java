@@ -1,6 +1,8 @@
 package Service;
 
+import Commands.XmlProcessing.XmlRouteReader;
 import MyClasses.Route;
+import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 
@@ -12,9 +14,11 @@ import java.util.LinkedHashMap;
 public class CollectionManager {
 
 
-    public static LinkedHashMap<String, Route> routeList = new LinkedHashMap<>();
+    //public static LinkedHashMap<String, Route> routeList = new LinkedHashMap<>();
     // Дата инициализации коллекции. Обновляется каждый раз при запуске приложения.
+    public static LinkedHashMap<String, Route> routeList = XmlRouteReader.readRoutesFromXml();
     private final java.time.ZonedDateTime initializationTime;
+
     {
         initializationTime = java.time.ZonedDateTime.now();
     }
