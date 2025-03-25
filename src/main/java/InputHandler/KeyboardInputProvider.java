@@ -1,6 +1,7 @@
 package InputHandler;
 
 import java.util.Scanner;
+import java.util.SortedMap;
 
 public class KeyboardInputProvider implements InputProvider {
     private final Scanner scanner = new Scanner(System.in);
@@ -9,8 +10,15 @@ public class KeyboardInputProvider implements InputProvider {
 
     @Override
     public String readString(String prompt) {
-        System.out.println(prompt);
-        return scanner.nextLine().trim();
+        while (true) {
+            System.out.println(prompt);
+            String inpStr = scanner.nextLine().trim();
+            if (!inpStr.isEmpty()) {
+                return inpStr;
+            }else {
+                System.out.println("Должны содержаться какие-нибудь символы, попробуйте еще раз");
+            }
+        }
     }
 
     @Override
@@ -60,11 +68,17 @@ public class KeyboardInputProvider implements InputProvider {
     }
 
     @Override
-    public double readDouble(String prompt) {
+    public double readDouble(String prompt, int minValue) {
         while (true) {
             try {
                 System.out.println(prompt);
-                return Double.parseDouble(scanner.nextLine().trim());
+                double inp = Double.parseDouble(scanner.nextLine().trim());
+                System.out.println(prompt);
+                if (inp > minValue) {
+                    return inp;
+                }else{
+                    System.out.println("Число должно быть больше, повторите попытку");
+                }
             } catch (NumberFormatException e) {
                 System.out.println("Нужно ввести число.");
             }

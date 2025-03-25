@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 import static Service.CollectionManager.routeList;
 
-public class inputName {
+public class inputObject {
 
 
     public static void inputKey(Route route){
@@ -24,7 +24,7 @@ public class inputName {
     public static String findKeyById(InputProvider inputProvider) {
         while (true) {
             try {
-                int id = inputProvider.readInt("Введите y:", -100000);
+                int id = inputProvider.readInt("Введите ID:", -100000);
                 for (Map.Entry<String, Route> entry : routeList.entrySet()) {
                     if (entry.getValue().getId() == id) {
                         return entry.getKey();
@@ -39,9 +39,8 @@ public class inputName {
 
     public static void sthName(Route route, InputProvider inputProvider) {
         // Устанавливаем название
-
         route.setName(inputProvider.readString("Введите название:"));
-        if (route.getKey()==null){
+        if (route.getKey() == null) {
             route.setKey(route.getName());
         }
         // Устанавливаем координаты
@@ -65,9 +64,13 @@ public class inputName {
         locationFrom.setY(inputProvider.readInt("Введите y:", Integer.MIN_VALUE));
         locationFrom.setZ(inputProvider.readInt("Введите z:", Integer.MIN_VALUE));
         route.setFrom(locationFrom);
-
+        route.setDistance(inputProvider.readDouble("Введите расстояние:", 1));
         // Устанавливаем расстояние
-        route.setDistance(inputProvider.readDouble("Введите расстояние:"));
+
+
+
+
+
 
         // Добавляем в коллекцию
         CollectionManager collectionManager = new CollectionManager();

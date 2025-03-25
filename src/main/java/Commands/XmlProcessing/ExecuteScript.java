@@ -2,16 +2,15 @@ package Commands.XmlProcessing;
 
 import Commands.Command;
 import InputHandler.InputProvider;
-import InputHandler.KeyboardInputProvider;
 import InputHandler.ScriptInputProvider;
-import InputHandler.inputName;
+import InputHandler.inputObject;
 import MyClasses.Route;
 import Service.CommandManager;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.LinkedHashMap;
 import java.util.Scanner;
 
 import static Service.CollectionManager.routeList;
@@ -19,7 +18,7 @@ import static Service.CollectionManager.routeList;
 public class ExecuteScript implements Command {
 
     @Override
-    public void execute(String[] args) {
+    public LinkedHashMap<Object, Object> execute(String[] args) {
         while (true) {
             Scanner scanner = new Scanner(System.in);
             System.out.println("Введите путь к файлу: ");
@@ -47,22 +46,22 @@ public class ExecuteScript implements Command {
 //                            break;
                         case ("add"): {
                             Route rn = new Route();
-                            inputName.sthName(rn, inputProvider);
+                            inputObject.sthName(rn, inputProvider);
                             break;
                         }
                         case ("insertNull"):
                             {
                                 Route rn = new Route();
-                                inputName.inputKey(rn);
-                                inputName.sthName(rn, inputProvider);
+                                inputObject.inputKey(rn);
+                                inputObject.sthName(rn, inputProvider);
                                 routeList.put(rn.getKey(), rn);
                                 break;
                             }
                         case ("updateId"):
                             {
-                                String k =inputName.findKeyById(inputProvider);
+                                String k = inputObject.findKeyById(inputProvider);
                                 Route rn = routeList.get(k);
-                                inputName.sthName(rn, inputProvider);
+                                inputObject.sthName(rn, inputProvider);
                                 routeList.put(rn.getName(),rn);
                                 break;
                             }
@@ -81,6 +80,7 @@ public class ExecuteScript implements Command {
             }
 
         }
+        return null;
     }
         @Override
     public String getDescription() {

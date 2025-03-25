@@ -9,7 +9,7 @@ import static Service.CollectionManager.routeList;
 
 public class RemoveLower implements Command{
     @Override
-    public void execute(String[] args) {
+    public LinkedHashMap<Object, Object> execute(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int inpKey;
         // Ввод ключа
@@ -47,6 +47,7 @@ public class RemoveLower implements Command{
         } else {
             System.out.println("Коллекция пуста! Введите add для добавления нового элемента.");
         }
+        return null;
     }
 
 

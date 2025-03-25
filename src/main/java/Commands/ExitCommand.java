@@ -1,9 +1,11 @@
 package Commands;
 
+import java.util.LinkedHashMap;
+
 public class ExitCommand implements Command {
 
     @Override
-    public void execute(String[] args) {
+    public LinkedHashMap<Object, Object> execute(String[] args) {
         System.out.println(" ______\n" +
                 "< bye >\n" +
                 " ------\n" +
@@ -17,6 +19,7 @@ public class ExitCommand implements Command {
                 "\n" +
                 "\n");
         System.exit(0);
+        return null;
     }
 
     @Override

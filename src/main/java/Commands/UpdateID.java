@@ -2,20 +2,23 @@ package Commands;
 
 import InputHandler.InputProvider;
 import InputHandler.KeyboardInputProvider;
-import InputHandler.inputName;
+import InputHandler.inputObject;
 import MyClasses.Route;
+
+import java.util.LinkedHashMap;
 
 import static Service.CollectionManager.routeList;
 
 public class UpdateID extends AddCommand{
 
     @Override
-    public void execute(String[] args) {
+    public LinkedHashMap<Object, Object> execute(String[] args) {
         InputProvider inputProvider = new KeyboardInputProvider();
-        String k =inputName.findKeyById(inputProvider);
+        String k = inputObject.findKeyById(inputProvider);
         Route rn = routeList.get(k);
-        inputName.sthName(rn, inputProvider);
+        inputObject.sthName(rn, inputProvider);
         routeList.put(rn.getName(),rn);
+        return null;
     }
 
     @Override

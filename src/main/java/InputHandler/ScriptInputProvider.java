@@ -37,7 +37,11 @@ public class ScriptInputProvider implements InputProvider {
         try {
             long value = Long.parseLong(reader.readLine().trim());
             if (value < minValue) {
-                throw new IllegalArgumentException("Значение должно быть не меньше " + minValue);
+                try {
+                    throw new IllegalArgumentException("Значение должно быть не меньше " + minValue);
+                }catch (IllegalArgumentException e){
+                    System.out.println(e.getMessage());
+                }
             }
             return value;
         } catch (IOException e) {
@@ -55,11 +59,22 @@ public class ScriptInputProvider implements InputProvider {
     }
 
     @Override
-    public double readDouble(String prompt) {
+    public double readDouble(String prompt, int minValue) throws IllegalArgumentException {
         try {
-            return Double.parseDouble(reader.readLine().trim());
+            System.out.println(prompt);
+            double inp = Double.parseDouble(reader.readLine().trim());
+
+            if (inp <= minValue) {
+                System.out.println("Значение должно быть больше " + minValue);
+                throw new IllegalArgumentException("Некорректное расстояние");
+            }
+            return inp;
+
+        } catch (NumberFormatException e) {
+            System.out.println("Это не число");
+            throw new IllegalArgumentException("Это не число");
         } catch (IOException e) {
-            throw new RuntimeException("Ошибка при чтении числа из скрипта", e);
+            throw new RuntimeException("Ошибка сохранения в файл");
         }
     }
 }

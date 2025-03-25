@@ -2,7 +2,6 @@ package Commands.XmlProcessing;
 
 import Commands.Command;
 import MyClasses.Route;
-import Service.CollectionManager;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Marshaller;
@@ -26,7 +25,7 @@ import static Service.CollectionManager.routeList;
 
 public class SaveCommand implements Command {
     @Override
-    public void execute(String[] args) {
+    public LinkedHashMap<Object, Object> execute(String[] args) {
         LinkedHashMap<String, Route> routeMap = routeList;
         String filePath = "src\\main\\java\\files\\file.xml";
         File file1 = new File(filePath);
@@ -65,10 +64,10 @@ public class SaveCommand implements Command {
 
             System.out.println("Коллекция успешно сохранена в файл: " + filePath);
         } catch (JAXBException | IOException e) {
-            e.printStackTrace();
-
             System.out.println("Ошибка сохранения в файл.");
+            e.printStackTrace();
         }
+        return null;
     }
 
     @Override

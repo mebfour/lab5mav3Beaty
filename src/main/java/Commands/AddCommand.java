@@ -1,10 +1,10 @@
 package Commands;
 import InputHandler.InputProvider;
 import InputHandler.KeyboardInputProvider;
-import InputHandler.inputName;
+import InputHandler.inputObject;
 import MyClasses.Route;
 
-import java.util.Scanner;
+import java.util.LinkedHashMap;
 
 public class AddCommand implements Command{
 
@@ -14,10 +14,11 @@ public class AddCommand implements Command{
     }
 
     @Override
-    public void execute(String[] args) {
+    public LinkedHashMap<Object, Object> execute(String[] args) {
         InputProvider inputProvider = new KeyboardInputProvider();
         Route rn = new Route();
-        inputName.sthName(rn, inputProvider);
+        inputObject.sthName(rn, inputProvider);
+        return null;
     }
 
 

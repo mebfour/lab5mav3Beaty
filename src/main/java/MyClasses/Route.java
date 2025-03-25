@@ -1,19 +1,20 @@
 package MyClasses;
 
-import jakarta.xml.bind.annotation.XmlElement;
-import jakarta.xml.bind.annotation.XmlRootElement;
-import jakarta.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import java.time.ZonedDateTime;
 
 
 @XmlRootElement(name = "route") // Указываем, что это корневой элемент XML
+@XmlAccessorType(XmlAccessType.PROPERTY)
 @XmlType(propOrder = {"key", "name", "coordinates", "creationDate", "to", "from", "distance", "id"})//упорядочения элементов в XML.
 public class Route {
-    private static int idGenerator;
+    private static int idGenerator=1;
     private int id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; //Поле не может быть null, Строка не может быть пустой
     private Coordinates coordinates; //Поле не может быть null
+
     private java.time.ZonedDateTime creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
     private Location from; //Поле не может быть null
     private Location to; //Поле может быть null
@@ -60,6 +61,7 @@ public class Route {
     public void setName(String name) {
         this.name = name;
     }
+
     @XmlElement(name= "coordinates")
     public Coordinates getCoordinates() {
         return coordinates;
