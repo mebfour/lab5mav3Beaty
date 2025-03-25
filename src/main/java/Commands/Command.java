@@ -1,7 +1,9 @@
 package Commands;
 
+import java.util.LinkedHashMap;
+
 public interface Command {
-    void execute(String[] args);      //  см. паттерн Command
+    LinkedHashMap<Object, Object> execute(String[] args);      //  см. паттерн Command
     String getDescription();
 
 

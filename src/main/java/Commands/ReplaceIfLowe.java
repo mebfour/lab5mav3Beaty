@@ -2,13 +2,14 @@ package Commands;
 
 import MyClasses.Route;
 
+import java.util.LinkedHashMap;
 import java.util.Scanner;
 
 import static Service.CollectionManager.routeList;
 
 public class ReplaceIfLowe implements Command{
     @Override
-    public void execute(String[] args) {
+    public LinkedHashMap<Object, Object> execute(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
         String inpKey;
@@ -41,6 +42,7 @@ public class ReplaceIfLowe implements Command{
         }else {
             System.out.println("Введенный ID не меньше уже имеющегося, так низя(");
         }
+        return null;
     }
 
     @Override

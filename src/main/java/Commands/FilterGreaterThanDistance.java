@@ -3,6 +3,7 @@ package Commands;
 import MyClasses.Route;
 
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -10,7 +11,7 @@ import static Service.CollectionManager.routeList;
 
 public class FilterGreaterThanDistance implements Command{
     @Override
-    public void execute(String[] args) {
+    public LinkedHashMap<Object, Object> execute(String[] args) {
         Double minDist;
         Scanner scanner = new Scanner(System.in);
         while (true) {
@@ -39,6 +40,7 @@ public class FilterGreaterThanDistance implements Command{
         }
 
 
+        return null;
     }
 
     @Override
