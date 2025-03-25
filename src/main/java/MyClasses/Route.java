@@ -4,6 +4,7 @@ import jakarta.xml.bind.annotation.*;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import java.time.ZonedDateTime;
+import java.util.Date;
 
 
 @XmlRootElement(name = "route") // Указываем, что это корневой элемент XML
@@ -15,7 +16,7 @@ public class Route {
     private String name; //Поле не может быть null, Строка не может быть пустой
     private Coordinates coordinates; //Поле не может быть null
 
-    private java.time.ZonedDateTime creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
+    private Date creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
     private Location from; //Поле не может быть null
     private Location to; //Поле может быть null
     private Double distance; //Поле может быть null, Значение поля должно быть больше 1
@@ -23,7 +24,7 @@ public class Route {
 
     public Route() {}
 
-    public Route(int id, String name, Coordinates coordinates, java.time.ZonedDateTime creationDate, Location from, Location to, Double distance) {
+    public Route(int id, String name, Coordinates coordinates, Date creationDate, Location from, Location to, Double distance) {
         this.id = id;
         this.name = name;
         this.coordinates = coordinates;
@@ -71,11 +72,11 @@ public class Route {
         this.coordinates = coordinates;
     }
 
-    public ZonedDateTime getCreationDate() {
+    public Date getCreationDate() {
         return creationDate;
     }
     @XmlElement(name= "creationDate")
-    public void setCreationDate(java.time.ZonedDateTime creationDate) {
+    public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
     }
     @XmlElement(name = "to")
@@ -108,7 +109,7 @@ public class Route {
 
     {
         this.id = idGenerator++;
-        this.creationDate = java.time.ZonedDateTime.now();
+        this.creationDate = new Date();
     }
     @XmlElement(name="id")
     public int getId() {
