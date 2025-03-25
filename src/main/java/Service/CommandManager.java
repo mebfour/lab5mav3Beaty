@@ -12,7 +12,6 @@ public class CommandManager {
     public static Map<String, Command> commandList = new HashMap<>();
 
     static {
-
         commandList.put("add", new AddCommand());
         commandList.put("info", new InfoCommand());
         commandList.put("show", new ShowCommand());
@@ -28,7 +27,6 @@ public class CommandManager {
         commandList.put("min_by_name", new MinByName());
         commandList.put("max_by_id", new MaxByID());
         commandList.put("save", new SaveCommand());
-
         commandList.put("execute_script", new ExecuteScript());
         commandList.put("filter_greater_than_distance", new FilterGreaterThanDistance());
     }

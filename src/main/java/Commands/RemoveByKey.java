@@ -10,9 +10,20 @@ public class RemoveByKey implements Command {
     @Override
     public LinkedHashMap<Object, Object> execute(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Введите ключ элемента, который Вы хотите удалить: ");
-        String k = scanner.nextLine();
-        routeList.remove(k);
+
+        while (true) {
+            System.out.println("Введите ключ элемента, который Вы хотите удалить: ");
+            String inpKey = scanner.nextLine().trim();  // Добавил trim() для обработки пробелов
+
+            if (routeList.containsKey(inpKey)) {
+                routeList.remove(inpKey);
+                System.out.println("Элемент с ключом '" + inpKey + "' успешно удален");
+                break;
+            } else {
+                System.out.println("Элемент с ключом '" + inpKey + "' не найден");
+                // Цикл продолжится для нового ввода
+            }
+        }
         return null;
     }
 
@@ -20,6 +31,6 @@ public class RemoveByKey implements Command {
     public String getDescription() {
         return "удаляет элемент из коллекции по его ключу";
     }
-
-
 }
+
+
