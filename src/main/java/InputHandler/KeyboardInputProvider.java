@@ -73,7 +73,7 @@ public class KeyboardInputProvider implements InputProvider {
             try {
                 System.out.println(prompt);
                 double inp = Double.parseDouble(scanner.nextLine().trim());
-                System.out.println(prompt);
+
                 if (inp > minValue) {
                     return inp;
                 }else{

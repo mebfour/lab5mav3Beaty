@@ -46,14 +46,14 @@ public class ExecuteScript implements Command {
 //                            break;
                         case ("add"): {
                             Route rn = new Route();
-                            inputObject.sthName(rn, inputProvider);
+                            inputObject.inputObject(rn, inputProvider);
                             break;
                         }
                         case ("insertNull"):
                             {
                                 Route rn = new Route();
                                 inputObject.inputKey(rn);
-                                inputObject.sthName(rn, inputProvider);
+                                inputObject.inputObject(rn, inputProvider);
                                 routeList.put(rn.getKey(), rn);
                                 break;
                             }
@@ -61,7 +61,7 @@ public class ExecuteScript implements Command {
                             {
                                 String k = inputObject.findKeyById(inputProvider);
                                 Route rn = routeList.get(k);
-                                inputObject.sthName(rn, inputProvider);
+                                inputObject.inputObject(rn, inputProvider);
                                 routeList.put(rn.getName(),rn);
                                 break;
                             }

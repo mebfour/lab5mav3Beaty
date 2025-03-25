@@ -17,7 +17,7 @@ public class AddCommand implements Command{
     public LinkedHashMap<Object, Object> execute(String[] args) {
         InputProvider inputProvider = new KeyboardInputProvider();
         Route rn = new Route();
-        inputObject.sthName(rn, inputProvider);
+        inputObject.inputObject(rn, inputProvider);
         return null;
     }
 

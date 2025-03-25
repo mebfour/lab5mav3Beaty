@@ -4,6 +4,7 @@ import InputHandler.InputProvider;
 import InputHandler.KeyboardInputProvider;
 import InputHandler.inputObject;
 import MyClasses.Route;
+import Service.CommandManager;
 
 import java.util.LinkedHashMap;
 
@@ -16,8 +17,11 @@ public class UpdateID extends AddCommand{
         InputProvider inputProvider = new KeyboardInputProvider();
         String k = inputObject.findKeyById(inputProvider);
         Route rn = routeList.get(k);
-        inputObject.sthName(rn, inputProvider);
-        routeList.put(rn.getName(),rn);
+        inputObject.inputObject(rn, inputProvider);
+
+        routeList.remove(rn.getName());
+
+
         return null;
     }
 

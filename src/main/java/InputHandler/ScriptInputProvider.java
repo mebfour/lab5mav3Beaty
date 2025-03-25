@@ -15,6 +15,7 @@ public class ScriptInputProvider implements InputProvider {
         try {
             return reader.readLine().trim();
         } catch (IOException e) {
+            System.out.println("");
             throw new RuntimeException("Ошибка при чтении строки из скрипта", e);
         }
     }

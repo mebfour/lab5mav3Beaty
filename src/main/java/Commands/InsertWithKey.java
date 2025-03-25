@@ -17,7 +17,7 @@ public class InsertWithKey extends AddCommand {
         InputProvider inputProvider = new KeyboardInputProvider();
         Route rn = new Route();
         inputObject.inputKey(rn);
-        inputObject.sthName(rn, inputProvider);
+        inputObject.inputObject(rn, inputProvider);
         routeList.put(rn.getKey(), rn);
 
         return null;

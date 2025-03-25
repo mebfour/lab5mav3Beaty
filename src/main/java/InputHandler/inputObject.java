@@ -37,7 +37,7 @@ public class inputObject {
         }
     }
 
-    public static void sthName(Route route, InputProvider inputProvider) {
+    public static void inputObject(Route route, InputProvider inputProvider) {
         // Устанавливаем название
         route.setName(inputProvider.readString("Введите название:"));
         if (route.getKey() == null) {
