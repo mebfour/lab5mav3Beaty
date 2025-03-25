@@ -18,15 +18,15 @@ public class CommandManager {
         commandList.put("show", new ShowCommand());
         commandList.put("exit", new ExitCommand());
         commandList.put("insert_with_key", new InsertWithKey());
-        commandList.put("updateId", new UpdateID());
+        commandList.put("update_id", new UpdateID());
         commandList.put("help", new HelpCommand());
-        commandList.put("removeByKey", new RemoveByKey());
+        commandList.put("remove_by_key", new RemoveByKey());
         commandList.put("clear", new Clear());
-        commandList.put("removeGreater", new RemoveGreater());
-        commandList.put("removeLower", new RemoveLower());
-        commandList.put("replaceIfLowe", new ReplaceIfLowe());
-        commandList.put("minByName", new MinByName());
-        commandList.put("maxById", new MaxByID());
+        commandList.put("remove_greater", new RemoveGreater());
+        commandList.put("remove_lower", new RemoveLower());
+        commandList.put("replace_if_lowe", new ReplaceIfLowe());
+        commandList.put("min_by_name", new MinByName());
+        commandList.put("max_by_id", new MaxByID());
         commandList.put("save", new SaveCommand());
 
         commandList.put("execute_script", new ExecuteScript());

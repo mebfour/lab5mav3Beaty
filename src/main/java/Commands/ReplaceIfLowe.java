@@ -14,22 +14,17 @@ public class ReplaceIfLowe implements Command{
         Scanner scanner = new Scanner(System.in);
         String inpKey;
         int inpID;
-        System.out.println("Введите ключ элемента, который Вы хотите изменить: ");
-        inpKey = scanner.nextLine();
         while (true){
+            System.out.println("Введите ключ элемента, который Вы хотите изменить: ");
+            inpKey = scanner.nextLine();
             if (routeList.containsKey(inpKey)){
-
-                // Ввод id
-                while (true) {
-                    try {
-                        System.out.print("Введите новый id элемента: ");
-                        inpID = Integer.parseInt(scanner.nextLine());
-                        break;
-                    } catch (NumberFormatException e) {
-                        System.out.println("Нужно ввести целое число.");
-                    }
+                try {
+                    System.out.print("Введите новый id элемента: ");
+                    inpID = Integer.parseInt(scanner.nextLine());
+                    break;
+                } catch (NumberFormatException e) {
+                    System.out.println("Нужно ввести целое число.");
                 }
-                break;
             }else {
                 System.out.println("Элемент с таким ключом не найден, давайте попробуем еще раз!");
             }

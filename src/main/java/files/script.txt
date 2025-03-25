@@ -1,4 +1,4 @@
-show
+
 add
 name
 3
@@ -11,5 +11,5 @@ mesto2
 6
 8
 9
--1
+78
 show

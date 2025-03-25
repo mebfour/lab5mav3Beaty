@@ -11,7 +11,7 @@ import java.util.LinkedHashMap;
 public class XmlRouteReader {
 
     public static LinkedHashMap<String, Route> readRoutesFromXml (){
-        String filePath = "src\\main\\java\\files\\file.xml";
+        String filePath = "file.xml";
         try (BufferedInputStream bis = new BufferedInputStream(new FileInputStream(filePath))) {
             // Создаем JAXB контекст
             JAXBContext context = JAXBContext.newInstance(RouteWrapper.class);

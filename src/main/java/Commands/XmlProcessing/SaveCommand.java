@@ -27,7 +27,7 @@ public class SaveCommand implements Command {
     @Override
     public LinkedHashMap<Object, Object> execute(String[] args) {
         LinkedHashMap<String, Route> routeMap = routeList;
-        String filePath = "src\\main\\java\\files\\file.xml";
+        String filePath = "file.xml";
         File file1 = new File(filePath);
 
         try {

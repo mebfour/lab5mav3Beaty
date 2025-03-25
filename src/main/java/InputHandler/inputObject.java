@@ -64,18 +64,29 @@ public class inputObject {
         locationFrom.setY(inputProvider.readInt("Введите y:", Integer.MIN_VALUE));
         locationFrom.setZ(inputProvider.readInt("Введите z:", Integer.MIN_VALUE));
         route.setFrom(locationFrom);
-        route.setDistance(inputProvider.readDouble("Введите расстояние:", 1));
-        // Устанавливаем расстояние
+        try {
+            Double dist = inputProvider.readDouble("Введите расстояние:", 1);
+            if (dist != -1) {
+                route.setDistance(dist);
+                // Добавляем в коллекцию
+                CollectionManager collectionManager = new CollectionManager();
+                collectionManager.addToCollection(route);
+                System.out.println("Добавлен в коллекцию!");
+            } else {
+                System.out.println("Некорректное расстояние");
+                throw new IllegalArgumentException();
+            }
+        }catch (IllegalArgumentException e){
+
+        }
 
 
 
 
 
 
-        // Добавляем в коллекцию
-        CollectionManager collectionManager = new CollectionManager();
-        collectionManager.addToCollection(route);
-        System.out.println("Добавлен в коллекцию!");
+
+
     }
 
 

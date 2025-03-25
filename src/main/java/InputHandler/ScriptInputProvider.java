@@ -72,9 +72,13 @@ public class ScriptInputProvider implements InputProvider {
 
         } catch (NumberFormatException e) {
             System.out.println("Это не число");
-            throw new IllegalArgumentException("Это не число");
-        } catch (IOException e) {
-            throw new RuntimeException("Ошибка сохранения в файл");
+            //throw new IllegalArgumentException("Это не число");
+        } catch (IOException e ) {
+            //throw new RuntimeException("Ошибка сохранения в файл");
+        } catch (IllegalArgumentException e){
+            System.out.println("Некорректные значения в файле");
+            //throw new IllegalArgumentException("Плохие значения");
         }
+        return -1;
     }
 }
