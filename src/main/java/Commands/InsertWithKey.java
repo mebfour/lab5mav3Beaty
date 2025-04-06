@@ -17,39 +17,27 @@ public class InsertWithKey extends AddCommand {
 
         InputProvider inputProvider = new KeyboardInputProvider();
         Route rn = new Route();
-        inputObject.inputKey(rn);
+        Scanner scanner = new Scanner(System.in);
+        String key;
+        while (true) {
+            try {if (args.length > 1) {
+                key = args[1];
+            } else {
+                // Если аргумента нет, запрашиваем ввод с консоли
+                System.out.print("Введите ключ: ");
+                key = scanner.nextLine();
+            }
+                break; // Выходим из цикла при успешном вводе
+            } catch (Exception e) {
+                System.out.println("Ошибка");
+                args = new String[0];
+            }
+        }
+        rn.setKey(key);
         inputObject.inputObject(rn, inputProvider);
         routeList.put(rn.getKey(), rn);
 
         return null;
-
-
-//        InputProvider inputProvider = new KeyboardInputProvider();
-//        Route rn = new Route();
-//
-//        String inpKey;
-//        while (true) {
-//            if (args.length > 1) {
-//                inpKey = args[1];
-//                inputObject.inputKey(rn);
-//                inputObject.inputObject(rn, inputProvider);
-//
-//
-//            } else {
-//                // Если аргумента нет, запрашиваем ввод с консоли
-//                Scanner scanner = new Scanner(System.in);
-//                System.out.print("Введите ключ: ");
-//                inpKey = scanner.nextLine();
-//                break;
-//            }
-//            break;
-//
-//        }
-//        rn.setKey(inpKey);
-//        inputObject.inputKey(rn);
-//        inputObject.inputObject(rn, inputProvider);
-//
-//        return null;
     }
 
     @Override
