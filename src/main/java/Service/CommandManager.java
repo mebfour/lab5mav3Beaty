@@ -31,6 +31,7 @@ public class CommandManager {
         commandList.put("filter_greater_than_distance", new FilterGreaterThanDistance());
     }
     public static void checkComm (String inp){
+
         String[] inpWords = inp.split(" ");
         String commandName = inpWords[0];
 

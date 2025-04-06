@@ -1,5 +1,6 @@
 package InputHandler;
 
+import java.math.BigDecimal;
 import java.util.Scanner;
 import java.util.SortedMap;
 
@@ -72,12 +73,14 @@ public class KeyboardInputProvider implements InputProvider {
         while (true) {
             try {
                 System.out.println(prompt);
-                double inp = Double.parseDouble(scanner.nextLine().trim());
+                String input = scanner.nextLine().trim();
+                BigDecimal decimal = new BigDecimal(input);
 
-                if (inp > minValue) {
-                    return inp;
-                }else{
-                    System.out.println("Число должно быть больше, повторите попытку");
+                // Сравниваем с minValue
+                if (decimal.compareTo(BigDecimal.valueOf(minValue)) > 0) {
+                    return decimal.doubleValue(); // Возвращаем double (если точность не критична)
+                }else {
+                    System.out.println("Число должно быть больше " + minValue + ", повторите попытку");
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Нужно ввести число.");

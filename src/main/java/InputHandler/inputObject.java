@@ -77,7 +77,7 @@ public class inputObject {
                 throw new IllegalArgumentException();
             }
         }catch (IllegalArgumentException e){
-
+            System.out.println("Ошибка");
         }
 
 
