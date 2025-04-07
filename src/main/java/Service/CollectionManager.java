@@ -7,6 +7,7 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 
 import java.time.ZonedDateTime;
 import java.util.LinkedHashMap;
+import java.util.Date;
 
 
 
@@ -14,23 +15,30 @@ import java.util.LinkedHashMap;
 @XmlRootElement(name = "routeList")
 public class CollectionManager {
     public static String globalFilePath;
-
     public static LinkedHashMap<String, Route> routeList = XmlRouteReader.readRoutesFromXml(globalFilePath);
-    private final java.time.ZonedDateTime initializationTime;
-
-    {
-        initializationTime = java.time.ZonedDateTime.now();
-    }
+    private static Date initializationTime = new Date();
 
     public static void init(String path) {
         globalFilePath = path;
         routeList = XmlRouteReader.readRoutesFromXml(globalFilePath);
     }
 
+    public static Date getInitializationTime() {
+        return initializationTime;
+    }
+
+    public static void setInitializationTime(Date date) {
+        if (date != null) {
+            initializationTime = date;
+        }
+    }
+
+
     public CollectionManager(){};
 
     public void addToCollection(Route route){
         try {
+
             routeList.put(route.getKey(), route);
         }catch (Exception e){
             routeList.put(route.getName(),route);
@@ -41,9 +49,6 @@ public class CollectionManager {
         return routeList.getClass();
     }
 
-    public ZonedDateTime getCollectionInitializationTime() {
-        return initializationTime;
-    }
 
 
     @XmlElement(name="route")

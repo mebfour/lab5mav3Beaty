@@ -2,6 +2,7 @@ package Commands.XmlProcessing;
 
 import Commands.Command;
 import MyClasses.Route;
+import Service.CollectionManager;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Marshaller;
@@ -10,8 +11,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.LinkedHashMap;
 
-import static Service.CollectionManager.globalFilePath;
-import static Service.CollectionManager.routeList;
+import static Service.CollectionManager.*;
 
 /**
  * JAXB использует аннотации, поэтому работать с ним легко и просто. Чтобы сохранить Java объект в XML файл,
@@ -33,7 +33,7 @@ public class SaveCommand implements Command {
         try {
             // Создаём обёртку для коллекции
             RouteWrapper wrapper = new RouteWrapper(routeMap);
-
+            wrapper.setInitializationTime(CollectionManager.getInitializationTime());
             // Создаём контекст JAXB
             JAXBContext context = JAXBContext.newInstance(RouteWrapper.class);
 

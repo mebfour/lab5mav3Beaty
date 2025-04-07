@@ -1,21 +1,22 @@
 package Commands.XmlProcessing;
 
 import MyClasses.Route;
+import Service.CollectionManager;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Unmarshaller;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.util.Collection;
 import java.util.LinkedHashMap;
 
-import static Service.CollectionManager.globalFilePath;
+
 
 public class XmlRouteReader {
 
     public static LinkedHashMap<String, Route> readRoutesFromXml (String filePath){
         if (filePath == null || filePath.isEmpty()) {
-
             filePath = "file.xml"; // значение по умолчанию
         }
         File file = new File(filePath);
@@ -46,9 +47,13 @@ public class XmlRouteReader {
              Unmarshaller unmarshaller = context.createUnmarshaller();
 
              // Читаем XML через BufferedInputStream
-             RouteWrapper wrapper = (RouteWrapper) unmarshaller.unmarshal(isr);
+            RouteWrapper wrapper = (RouteWrapper) unmarshaller.unmarshal(isr);
 
-            return wrapper.getRouteMap() != null ?
+            if (wrapper.getInitializationTime()!= null){
+                CollectionManager.setInitializationTime(wrapper.getInitializationTime());
+            }
+
+             return wrapper.getRouteMap() != null ?
                     new LinkedHashMap<>(wrapper.getRouteMap()) :
                     new LinkedHashMap<>();
         } catch (FileNotFoundException ex) {
