@@ -21,14 +21,17 @@ public class XmlRouteReader {
         File file = new File(filePath);
         if (!file.exists()) {
             System.out.println("Файл не найден");
+            filePath = "file.xml";
         }
         if (!file.canRead()) {
             System.out.println("Нет прав на чтение файла");
+            filePath = "file.xml";
         }
 
         // Проверка расширения файла (опционально)
         if (!filePath.toLowerCase().endsWith(".xml")) {
             System.out.println("Файл должен иметь расширение .xml");
+            filePath = "file.xml";
         }
         InputStreamReader isr = null;
         FileInputStream fis = null;
@@ -50,12 +53,31 @@ public class XmlRouteReader {
                     new LinkedHashMap<>();
         } catch (FileNotFoundException ex) {
             System.out.println("Ошибка");
+            return readDefaultFile();
         } catch (IOException ex) {
             System.out.println("Ошибка ввода-вывода");
+            return readDefaultFile();
         } catch (JAXBException ex) {
             System.out.println("Ошибка парсинга в Xml");
+            return readDefaultFile();
         }
-        return null;
     }
-
+    private static LinkedHashMap<String, Route> readDefaultFile() {
+        try {
+            File defaultFile = new File("file.xml");
+            if (defaultFile.exists()) {
+                try (InputStream is = new FileInputStream(defaultFile)) {
+                    JAXBContext context = JAXBContext.newInstance(RouteWrapper.class);
+                    Unmarshaller unmarshaller = context.createUnmarshaller();
+                    RouteWrapper wrapper = (RouteWrapper) unmarshaller.unmarshal(is);
+                    return wrapper.getRouteMap() != null ?
+                            new LinkedHashMap<>(wrapper.getRouteMap()) :
+                            new LinkedHashMap<>();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Ошибка чтения файла по умолчанию");
+        }
+        return new LinkedHashMap<>(); // Возвращаем пустую коллекцию
+    }
 }

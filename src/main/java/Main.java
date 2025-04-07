@@ -14,12 +14,13 @@ import static Service.CollectionManager.globalFilePath;
 public class Main {
 
     public static void main(String[] args) {
-
+        String filePath;
         if (args.length > 0) {
-            globalFilePath = args[0];
+             filePath= args[0];
         }else {
-            globalFilePath = "file.xml";
+            filePath = "file.xml";
         }
+        CollectionManager.init(filePath);
         Instructions.greeting(globalFilePath);
         DataProcessor dataProcessor = new DataProcessor();
         dataProcessor.processData(globalFilePath);

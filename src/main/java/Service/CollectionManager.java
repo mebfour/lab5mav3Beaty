@@ -21,6 +21,12 @@ public class CollectionManager {
     {
         initializationTime = java.time.ZonedDateTime.now();
     }
+
+    public static void init(String path) {
+        globalFilePath = path;
+        routeList = XmlRouteReader.readRoutesFromXml(globalFilePath);
+    }
+
     public CollectionManager(){};
 
     public void addToCollection(Route route){
