@@ -8,21 +8,12 @@ import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Marshaller;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.LinkedHashMap;
 
 import static Service.CollectionManager.*;
-
-/**
- * JAXB использует аннотации, поэтому работать с ним легко и просто. Чтобы сохранить Java объект в XML файл,
- * мы должны проставить необходимые JAXB аннотации в классе и методах класса, а затем
- * создать объект Marshaller для сохранения объекта в XML.
- *
- * Также есть специальный класс JAXBContext, который является точкой входа для JAXB и предоставляет методы
- * для сохранения/восстановления объекта.
- */
-
-
 
 public class SaveCommand implements Command {
     @Override
@@ -34,24 +25,26 @@ public class SaveCommand implements Command {
             // Создаём обёртку для коллекции
             RouteWrapper wrapper = new RouteWrapper(routeMap);
             wrapper.setInitializationTime(CollectionManager.getInitializationTime());
+
             // Создаём контекст JAXB
             JAXBContext context = JAXBContext.newInstance(RouteWrapper.class);
 
             // Создаём Marshaller
             Marshaller marshaller = context.createMarshaller();
-            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true); // Форматируем XML
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
-            // Проверяем, существует ли директория
+            // Проверяем и создаём директорию, если её нет
             File file = new File(filePath);
-
             File parentDir = file.getParentFile();
             if (parentDir != null && !parentDir.exists()) {
-                parentDir.mkdirs(); // Создаём директорию, если её нет
+                parentDir.mkdirs();
             }
 
+            // Удаляем существующий файл, если он есть
             if (file.exists()) {
-                file.delete(); // Удаляем существующий файл
+                file.delete();
             }
+
             // Создаём новый файл
             if (file.createNewFile()) {
                 System.out.println("Файл создан: " + filePath);
@@ -59,13 +52,15 @@ public class SaveCommand implements Command {
                 System.out.println("Файл уже существует, но был удалён и создан заново.");
             }
 
-            // Сохраняем коллекцию в XML-файл
-            marshaller.marshal(wrapper, file);
+            // Используем FileOutputStream для записи XML
+            try (OutputStream os = new FileOutputStream(file)) {
+                marshaller.marshal(wrapper, os);
+                System.out.println("Коллекция успешно сохранена в файл: " + filePath);
+            }
 
-            System.out.println("Коллекция успешно сохранена в файл: " + filePath);
         } catch (JAXBException | IOException e) {
             System.out.println("Ошибка сохранения в файл.");
-            e.printStackTrace();
+
         }
         return null;
     }
