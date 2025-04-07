@@ -6,27 +6,38 @@ import MyClasses.Route;
 import Service.CollectionManager;
 
 
+import java.util.Arrays;
 import java.util.Map;
 import java.util.Scanner;
 
 import static Service.CollectionManager.routeList;
+import static java.lang.System.in;
 
 public class inputObject {
 
 
     public static void inputKey(Route route){
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(in);
         System.out.println("Введите ключ: ");
         String key = scanner.nextLine();
         route.setKey(key);
     }
 
-    public static String findKeyById(InputProvider inputProvider) {
+    public static String findKeyById(InputProvider inputProvider, String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int inpId;
         while (true) {
             try {
-                int id = inputProvider.readInt("Введите ID:", -100000);
+
+                if (args.length > 1) {
+                    inpId = Integer.parseInt(args[1]);
+                } else {
+                    // Если аргумента нет, запрашиваем ввод с консоли
+
+                    inpId = inputProvider.readInt("Введите ID: ", 1);
+                }
                 for (Map.Entry<String, Route> entry : routeList.entrySet()) {
-                    if (entry.getValue().getId() == id) {
+                    if (entry.getValue().getId() == inpId) {
                         return entry.getKey();
                     }
                 }

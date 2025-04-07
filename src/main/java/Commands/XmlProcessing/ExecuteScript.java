@@ -59,7 +59,7 @@ public class ExecuteScript implements Command {
                             }
                         case ("updateId"):
                             {
-                                String k = inputObject.findKeyById(inputProvider);
+                                String k = inputObject.findKeyById(inputProvider, null);
                                 Route rn = routeList.get(k);
                                 inputObject.inputObject(rn, inputProvider);
                                 routeList.put(rn.getName(),rn);

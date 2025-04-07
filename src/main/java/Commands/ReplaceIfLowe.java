@@ -2,8 +2,7 @@ package Commands;
 
 import MyClasses.Route;
 
-import java.util.LinkedHashMap;
-import java.util.Scanner;
+import java.util.*;
 
 import static Service.CollectionManager.routeList;
 
@@ -12,30 +11,46 @@ public class ReplaceIfLowe implements Command{
     public LinkedHashMap<Object, Object> execute(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
+        String inpEl;
         String inpKey;
-        int inpID;
-        while (true){
-            System.out.println("Введите ключ элемента, который Вы хотите изменить: ");
-            inpKey = scanner.nextLine();
-            if (routeList.containsKey(inpKey)){
-                try {
-                    System.out.print("Введите новый id элемента: ");
-                    inpID = Integer.parseInt(scanner.nextLine());
-                    break;
-                } catch (NumberFormatException e) {
-                    System.out.println("Нужно ввести целое число.");
-                }
-            }else {
-                System.out.println("Элемент с таким ключом не найден, давайте попробуем еще раз!");
-            }
-        }
-        Route routeToModify = routeList.get(inpKey);
-        // Изменяем поле объекта
+        boolean flagSuc = true;
+        boolean done = false;
 
-        if (inpID < routeToModify.getId()){
-            routeToModify.setId(inpID);
-        }else {
-            System.out.println("Введенный ID не меньше уже имеющегося, так низя(");
+        while (true) {
+            try {
+                if (args.length > 1 && flagSuc) {
+                    inpEl = String.join(" ", Arrays.copyOfRange(args, 1, args.length));
+                } else {
+                    // Если аргумента нет, запрашиваем ввод с консоли
+                    System.out.print("Введите ключ элемента: ");
+                    inpEl = scanner.nextLine();
+                }
+                if (routeList.containsKey(inpEl)) {
+                    if (!routeList.isEmpty()) {
+                        Route routeToModify = routeList.get(inpEl);
+
+                        System.out.println("Введите новый ключ: ");
+                        inpKey = scanner.nextLine();
+
+                        if (inpKey.compareTo(routeToModify.getKey()) < 0){
+                            routeToModify.setKey(inpEl);
+                        }else {
+                            System.out.println("Введенный ключ не меньше уже имеющегося, так низя(");
+                        }
+                    } else {
+                        System.out.println("Коллекция пуста! Введите add для добавления нового элемента.");
+                    }
+
+                    break;
+                } else {
+                    System.out.println("Элемент с ключом " + inpEl + " не найден");
+                    flagSuc = false;
+                    // Цикл продолжится для нового ввода
+                }
+
+            } catch (Exception e) {
+                System.out.println("Ошибка");
+            }
         }
         return null;
     }

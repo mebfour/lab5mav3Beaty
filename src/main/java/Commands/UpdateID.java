@@ -15,7 +15,7 @@ public class UpdateID extends AddCommand{
     @Override
     public LinkedHashMap<Object, Object> execute(String[] args) {
         InputProvider inputProvider = new KeyboardInputProvider();
-        String k = inputObject.findKeyById(inputProvider);
+        String k = inputObject.findKeyById(inputProvider, args);
         Route rn = routeList.get(k);
         inputObject.inputObject(rn, inputProvider);
 

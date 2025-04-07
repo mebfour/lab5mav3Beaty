@@ -14,6 +14,7 @@ public class RemoveGreater implements Command{
         Scanner scanner = new Scanner(System.in);
         String inpKey;
         boolean flagSuc = true;
+        boolean done = false;
         while (true) {
             try {
                 if (args.length > 1 && flagSuc) {
@@ -30,13 +31,13 @@ public class RemoveGreater implements Command{
                     if (!routeList.isEmpty()) {
                         Iterator<Map.Entry<String, Route>> it = routeList.entrySet().iterator();
                         boolean foundKey = false; // Флаг для поиска ключа
+
                         while (it.hasNext()) {
                             Map.Entry<String, Route> entry = it.next();
-                            Route currentRoute = entry.getValue();
                             if (foundKey) {
                                 // Удаляем все элементы после найденного ключа
                                 it.remove(); // Используем итератор для удаления
-
+                                done = true;
                             } else if (entry.getKey().equals(inpKey)) {
                                 // Нашли ключ, устанавливаем флаг
                                 foundKey = true;
@@ -45,7 +46,9 @@ public class RemoveGreater implements Command{
                     } else {
                         System.out.println("Коллекция пуста! Введите add для добавления нового элемента.");
                     }
-
+                    if (done) {
+                        System.out.println("Элементы успешно удалены");
+                    }
                     break;
                 } else {
                     System.out.println("Элемент с ключом " + inpKey + " не найден");
