@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.LinkedHashMap;
 
+import static Service.CollectionManager.globalFilePath;
 import static Service.CollectionManager.routeList;
 
 /**
@@ -27,8 +28,7 @@ public class SaveCommand implements Command {
     @Override
     public LinkedHashMap<Object, Object> execute(String[] args) {
         LinkedHashMap<String, Route> routeMap = routeList;
-        String filePath = "file.xml";
-        File file1 = new File(filePath);
+        String filePath = globalFilePath;
 
         try {
             // Создаём обёртку для коллекции

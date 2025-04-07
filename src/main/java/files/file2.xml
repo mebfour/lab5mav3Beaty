@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<routes>
+    <routeMap>
+        <entry>
+            <key>first route</key>
+            <value>
+                <key>first route</key>
+                <name>first route</name>
+                <coordinates>
+                    <x>3</x>
+                    <y>4</y>
+                </coordinates>
+                <creationDate>2025-03-25T13:56:34.373+03:00</creationDate>
+                <to>
+                    <name>idk</name>
+                    <x>-78.0</x>
+                    <y>-15</y>
+                    <z>-4</z>
+                </to>
+                <from>
+                    <name>kakoe-to mesto, tyt lees</name>
+                    <x>-5.5</x>
+                    <y>-7</y>
+                    <z>-1</z>
+                </from>
+                <distance>2.0</distance>
+                <id>1</id>
+            </value>
+        </entry>
+        <entry>
+            <key>pupupu</key>
+            <value>
+                <key>pupupu</key>
+                <name>pupupu</name>
+                <coordinates>
+                    <x>1234</x>
+                    <y>5678</y>
+                </coordinates>
+                <creationDate>2025-04-07T12:37:55.620+03:00</creationDate>
+                <to>
+                    <name>meost</name>
+                    <x>1234.0</x>
+                    <y>1</y>
+                    <z>23</z>
+                </to>
+                <from>
+                    <name>123</name>
+                    <x>123.0</x>
+                    <y>123</y>
+                    <z>1</z>
+                </from>
+                <distance>1.0</distance>
+                <id>2</id>
+            </value>
+        </entry>
+    </routeMap>
+</routes>

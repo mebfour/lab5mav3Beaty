@@ -64,6 +64,14 @@
       <version>4.0.2</version> <!-- Убедитесь, что используете последнюю версию -->
     </dependency>
 
+    <!-- Реализация JAXB (RI) -->
+    <dependency>
+      <groupId>com.sun.xml.bind</groupId>
+      <artifactId>jaxb-impl</artifactId>
+      <version>4.0.3</version>
+      <scope>runtime</scope>
+    </dependency>
+
   </dependencies>
 
   <build>
