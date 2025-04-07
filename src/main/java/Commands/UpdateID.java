@@ -1,18 +1,28 @@
 package Commands;
 
-import IDK_IJUSTWANTAWORKINGFUCKINGPROGRAMM.inputName;
+import InputHandler.InputProvider;
+import InputHandler.KeyboardInputProvider;
+import InputHandler.inputObject;
 import MyClasses.Route;
+import Service.CommandManager;
+
+import java.util.LinkedHashMap;
 
 import static Service.CollectionManager.routeList;
 
 public class UpdateID extends AddCommand{
 
     @Override
-    public void execute(String[] args) {
-        Route rn = new Route();
-        inputName.updateID(rn);
-        inputName.sthName(rn);
-        routeList.put(rn.getName(),rn);
+    public LinkedHashMap<Object, Object> execute(String[] args) {
+        InputProvider inputProvider = new KeyboardInputProvider();
+        String k = inputObject.findKeyById(inputProvider, args);
+        Route rn = routeList.get(k);
+        inputObject.inputObject(rn, inputProvider);
+
+        routeList.remove(rn.getName());
+
+
+        return null;
     }
 
     @Override

@@ -3,6 +3,7 @@ package Commands;
 import MyClasses.Route;
 
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -10,17 +11,21 @@ import static Service.CollectionManager.routeList;
 
 public class FilterGreaterThanDistance implements Command{
     @Override
-    public void execute(String[] args) {
+    public LinkedHashMap<Object, Object> execute(String[] args) {
         Double minDist;
-        Scanner scanner = new Scanner(System.in);
         while (true) {
-            try {
+            try {if (args.length > 1) {
+                minDist = Double.parseDouble(args[1]);
+            } else {
+                // Если аргумента нет, запрашиваем ввод с консоли
+                Scanner scanner = new Scanner(System.in);
                 System.out.print("Введите расстояние: ");
-                minDist = Double.parseDouble(scanner.nextLine());    //такую же херню с интами
-
-                break;
+                minDist = Double.parseDouble(scanner.nextLine());
+            }
+                break; // Выходим из цикла при успешном вводе
             } catch (NumberFormatException e) {
                 System.out.println("Нужно ввести число.");
+                args = new String[0];
             }
         }
 
@@ -39,6 +44,7 @@ public class FilterGreaterThanDistance implements Command{
         }
 
 
+        return null;
     }
 
     @Override

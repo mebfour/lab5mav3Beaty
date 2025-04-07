@@ -2,45 +2,59 @@ package Commands;
 
 import MyClasses.Route;
 
-import java.util.Scanner;
+import java.util.*;
 
 import static Service.CollectionManager.routeList;
 
 public class ReplaceIfLowe implements Command{
     @Override
-    public void execute(String[] args) {
+    public LinkedHashMap<Object, Object> execute(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
+        String inpEl;
         String inpKey;
-        int inpID;
-        System.out.println("Введите ключ элемента, который Вы хотите изменить: ");
-        inpKey = scanner.nextLine();
-        while (true){
-            if (routeList.containsKey(inpKey)){
+        boolean flagSuc = true;
 
-                // Ввод id
-                while (true) {
-                    try {
-                        System.out.print("Введите новый id элемента: ");
-                        inpID = Integer.parseInt(scanner.nextLine());
-                        break;
-                    } catch (NumberFormatException e) {
-                        System.out.println("Нужно ввести целое число.");
+        while (true) {
+            try {
+                if (!routeList.isEmpty()) {
+                    if (args.length > 1 && flagSuc) {
+                        inpEl = String.join(" ", Arrays.copyOfRange(args, 1, args.length));
+                    } else {
+                        // Если аргумента нет, запрашиваем ввод с консоли
+                        System.out.print("Введите ключ элемента: ");
+                        inpEl = scanner.nextLine();
                     }
+                    if (routeList.containsKey(inpEl)) {
+
+                            Route routeToModify = routeList.get(inpEl);
+
+                            System.out.println("Введите новый ключ: ");
+                            inpKey = scanner.nextLine();
+
+                            if (inpKey.compareTo(routeToModify.getKey()) < 0) {
+                                routeToModify.setKey(inpEl);
+                            } else {
+                                System.out.println("Введенный ключ не меньше уже имеющегося, так низя(");
+                            }
+
+
+
+                        break;
+                    } else {
+                        System.out.println("Элемент с ключом " + inpEl + " не найден");
+                        flagSuc = false;
+                        // Цикл продолжится для нового ввода
+                    }
+                }else {
+                    System.out.println("Коллекция пуста! Введите add для добавления нового элемента.");
+                    break;
                 }
-                break;
-            }else {
-                System.out.println("Элемент с таким ключом не найден, давайте попробуем еще раз!");
+            } catch (Exception e) {
+                System.out.println("Ошибка");
             }
         }
-        Route routeToModify = routeList.get(inpKey);
-        // Изменяем поле объекта
-
-        if (inpID < routeToModify.getId()){
-            routeToModify.setId(inpID);
-        }else {
-            System.out.println("Введенный ID не меньше уже имеющегося, так низя(");
-        }
+        return null;
     }
 
     @Override

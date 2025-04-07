@@ -1,21 +1,30 @@
 package MyClasses;
 
+import jakarta.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
 import java.time.ZonedDateTime;
 import java.util.Date;
 
 
+@XmlRootElement(name = "route") // Указываем, что это корневой элемент XML
+@XmlAccessorType(XmlAccessType.PROPERTY)
+@XmlType(propOrder = {"key", "name", "coordinates", "creationDate", "to", "from", "distance", "id"})//упорядочения элементов в XML.
 public class Route {
-    private static int idGenerator;
+    private static int idGenerator=1;
     private int id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; //Поле не может быть null, Строка не может быть пустой
     private Coordinates coordinates; //Поле не может быть null
-    private java.time.ZonedDateTime creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
+
+    private Date creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
     private Location from; //Поле не может быть null
     private Location to; //Поле может быть null
     private Double distance; //Поле может быть null, Значение поля должно быть больше 1
     private String key;
 
-    public Route(int id, String name, Coordinates coordinates, java.time.ZonedDateTime creationDate, Location from, Location to, Double distance) {
+    public Route() {}
+
+    public Route(int id, String name, Coordinates coordinates, Date creationDate, Location from, Location to, Double distance) {
         this.id = id;
         this.name = name;
         this.coordinates = coordinates;
@@ -34,85 +43,18 @@ public class Route {
         this.distance = distance;
     }
 
-    public Route() {}
+
 
     public void setKey(String key) {
         this.key = key;
     }
+    @XmlElement(name= "key")    // xml имя элемента
     public String getKey(){
         return key;
     }
 
 
-    public static class RouteBuilder {
-        private static long idGenerator = 1; //в качестве id будем генерить числа последовательно
-        private long id;
-        private String name; //Поле не может быть null, Строка не может быть пустой
-        private Coordinates coordinates; //Поле не может быть null
-        private Location from; //Поле не может быть null
-        private Location to; //Поле может быть null
-        private Double distance;
-        private String key;
-
-        public RouteBuilder(String name, Coordinates coordinates, Location from, Location to, Double distance) {
-            this.name = name;
-            this.coordinates = coordinates;
-            this.from = from;
-            this.to = to;
-            this.distance = distance;
-        }
-
-
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public void setCoordinates(Coordinates coordinates) {
-            this.coordinates = coordinates;
-        }
-
-        public void setFrom(Location from) {
-            this.from = from;
-        }
-
-        public void setTo(Location to) {
-            this.to = to;
-        }
-
-        public void setDistance(Double distance) {
-            this.distance = distance;
-        }
-        public void setKey (String key){
-            this.key = key;
-        }
-
-        public Route build(){ return  new Route();}
-    }
-
-    public static void setIdGenerator(int idGenerator){
-        Route.idGenerator = idGenerator;
-    }
-
-    {
-        this.id = idGenerator++;
-        this.creationDate = java.time.ZonedDateTime.now();
-    }
-
-
-    public int compareTo(Route route){
-        return Long.compare(route.getId(), id);
-    }
-
-    public int getId() {
-        return id;
-    }
-
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
+    @XmlElement(name= "name")
     public String getName() {
         return name;
     }
@@ -121,6 +63,7 @@ public class Route {
         this.name = name;
     }
 
+    @XmlElement(name= "coordinates")
     public Coordinates getCoordinates() {
         return coordinates;
     }
@@ -129,22 +72,14 @@ public class Route {
         this.coordinates = coordinates;
     }
 
-    public ZonedDateTime getCreationDate() {
+    public Date getCreationDate() {
         return creationDate;
     }
-
-    public void setCreationDate(java.time.ZonedDateTime creationDate) {
+    @XmlElement(name= "creationDate")
+    public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
     }
-
-    public Location getFrom() {
-        return from;
-    }
-
-    public void setFrom(Location from) {
-        this.from = from;
-    }
-
+    @XmlElement(name = "to")
     public Location getTo() {
         return to;
     }
@@ -152,13 +87,37 @@ public class Route {
     public void setTo(Location to) {
         this.to = to;
     }
+    @XmlElement(name="from")
+    public Location getFrom() {
+        return from;
+    }
 
+    public void setFrom(Location from) {
+        this.from = from;
+    }
+    @XmlElement(name="distance")
     public Double getDistance() {
         return distance;
     }
 
     public void setDistance(Double distance) {
         this.distance = distance;
+    }
+    public static void setIdGenerator(int idGenerator){
+        Route.idGenerator = idGenerator;
+    }
+
+    {
+        this.id = idGenerator++;
+        this.creationDate = new Date();
+    }
+    @XmlElement(name="id")
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String toString() {
