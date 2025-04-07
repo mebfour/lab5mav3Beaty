@@ -18,16 +18,23 @@ public class InsertWithKey extends AddCommand {
         InputProvider inputProvider = new KeyboardInputProvider();
         Route rn = new Route();
         Scanner scanner = new Scanner(System.in);
-        String key;
+        String key = null;
         while (true) {
-            try {if (args.length > 1) {
-                key = args[1];
-            } else {
-                // Если аргумента нет, запрашиваем ввод с консоли
-                System.out.print("Введите ключ: ");
-                key = scanner.nextLine();
-            }
-                break; // Выходим из цикла при успешном вводе
+
+            try {
+                if (!routeList.isEmpty()) {
+                    if (args.length > 1) {
+                        key = args[1];
+                    } else {
+                        // Если аргумента нет, запрашиваем ввод с консоли
+                        System.out.print("Введите ключ: ");
+                        key = scanner.nextLine();
+                    }
+                    break; // Выходим из цикла при успешном вводе
+                }else {
+                    System.out.println("Коллекция пуста! Введите add для добавления нового элемента.");
+                    break;
+                }
             } catch (Exception e) {
                 System.out.println("Ошибка");
                 args = new String[0];

@@ -15,21 +15,26 @@ public class RemoveByKey implements Command {
         boolean flagSuc = true;
         while (true) {
             try {
-                if (args.length > 1 && flagSuc == true) {
-                inpKey = String.join(" ", Arrays.copyOfRange(args, 1, args.length));
-            } else {
-                // Если аргумента нет, запрашиваем ввод с консоли
-                System.out.print("Введите ключ элемента, который Вы хотите удалить: ");
-                inpKey = scanner.nextLine();
-            }
-                if (routeList.containsKey(inpKey)) {
-                    routeList.remove(inpKey);
-                    System.out.println("Элемент с ключом " + inpKey + " успешно удален");
+                if (!routeList.isEmpty()) {
+                    if (args.length > 1 && flagSuc == true) {
+                        inpKey = String.join(" ", Arrays.copyOfRange(args, 1, args.length));
+                    } else {
+                        // Если аргумента нет, запрашиваем ввод с консоли
+                        System.out.print("Введите ключ элемента, который Вы хотите удалить: ");
+                        inpKey = scanner.nextLine();
+                    }
+                    if (routeList.containsKey(inpKey)) {
+                        routeList.remove(inpKey);
+                        System.out.println("Элемент с ключом " + inpKey + " успешно удален");
+                        break;
+                    } else {
+                        System.out.println("Элемент с ключом " + inpKey + " не найден");
+                        flagSuc = false;
+                        // Цикл продолжится для нового ввода
+                    }
+                }else {
+                    System.out.println("Коллекция пуста! Введите add для добавления нового элемента.");
                     break;
-                } else {
-                    System.out.println("Элемент с ключом " + inpKey + " не найден");
-                    flagSuc = false;
-                    // Цикл продолжится для нового ввода
                 }
 
             } catch (Exception e) {
