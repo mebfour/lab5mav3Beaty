@@ -46,9 +46,8 @@ public class ScriptInputProvider implements InputProvider {
             }
             return value;
         } catch (IOException e) {
-            System.out.println("Ошибка при чтении числа из скрипта");
+            throw new RuntimeException("Ошибка при чтении числа из скрипта", e);
         }
-        return minValue;
     }
 
     @Override

@@ -1,3 +1,4 @@
+
 add
 name
 3
@@ -11,5 +12,4 @@ mesto2
 8
 9
 345
-execute_script script2.txt
 show

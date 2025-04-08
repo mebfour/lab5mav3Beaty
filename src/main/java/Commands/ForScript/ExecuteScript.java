@@ -18,23 +18,14 @@ import java.util.Scanner;
 import static Service.CollectionManager.routeList;
 
 public class ExecuteScript implements Command {
-    private static final HashSet<String> callStack = new HashSet<>();
 
     @Override
     public LinkedHashMap<Object, Object> execute(String[] args) {
-        String filePath;
-
-        Scanner scanner = new Scanner(System.in);
         while (true) {
-            if (args.length > 1) {
-                filePath = String.join(" ", Arrays.copyOfRange(args, 1, args.length));
-            } else {
-                // Если аргумента нет, запрашиваем ввод с консоли
-                System.out.print("Введите путь к файлу: ");
-                filePath = scanner.nextLine().trim();
-            }
-            callStack.add("execute_script " + filePath);
-
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Введите путь к файлу: ");
+            //        String filePath = "src\\main\\java\\files\\script.txt";
+            String filePath = scanner.nextLine().trim();
             if (!new java.io.File(filePath).exists()) {
                 System.out.println("Файл не найден: " + filePath);
                 continue;
@@ -51,39 +42,29 @@ public class ExecuteScript implements Command {
                     }
                     // Выполняем команду
                     InputProvider inputProvider = new ScriptInputProvider(reader);
-
-                    String[] parts = line.split("\\s+", 2); // Разделяем по пробелу (максимум на 2 части)
-                    String line1 = parts[0]; // Первая часть — команда
-                    String argument = parts.length > 1 ? parts[1] : ""; // Вторая часть — аргумент (если есть)
-                    switch (line1) {
-                        case ("execute_script"): {
-                            if (callStack.contains(line)) {
-                                System.out.println("Упс, рекурсия. Не вызывайте одни и те же скрипты");
-                                break;
-                            }
-                            callStack.add(line);
-
-                        }
-
-
-
+                    switch (line) {
+//                        case ("execute_script"):
+//                            System.out.println("Рекурсия нынче запрещена!");
+//                            break;
                         case ("add"): {
                             Route rn = new Route();
                             inputObject.inputObject(rn, inputProvider);
                             break;
                         }
-                        case ("insert_with_key"): {
+                        case ("insertNull"):
+                        {
                             Route rn = new Route();
                             inputObject.inputKey(rn);
                             inputObject.inputObject(rn, inputProvider);
                             routeList.put(rn.getKey(), rn);
                             break;
                         }
-                        case ("update_id"): {
+                        case ("updateId"):
+                        {
                             String k = inputObject.findKeyById(inputProvider, null);
                             Route rn = routeList.get(k);
                             inputObject.inputObject(rn, inputProvider);
-                            routeList.put(rn.getName(), rn);
+                            routeList.put(rn.getName(),rn);
                             break;
                         }
                         default:
@@ -98,18 +79,13 @@ public class ExecuteScript implements Command {
                 throw new RuntimeException(e);
             } catch (StackOverflowError e) {
                 System.out.println("Переделайте скрипт, пожалуйста.");
-            } finally {
-                callStack.remove("execute_script " + filePath);
             }
 
         }
         return null;
     }
-
-
     @Override
-    public String getDescription () {
+    public String getDescription() {
         return "считывает и исполняет скрипт";
-
     }
 }
