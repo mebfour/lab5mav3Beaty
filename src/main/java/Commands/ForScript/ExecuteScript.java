@@ -21,11 +21,22 @@ public class ExecuteScript implements Command {
 
     @Override
     public LinkedHashMap<Object, Object> execute(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);
+        String filePath = null;
         while (true) {
-            Scanner scanner = new Scanner(System.in);
-            System.out.println("Введите путь к файлу: ");
-            //        String filePath = "src\\main\\java\\files\\script.txt";
-            String filePath = scanner.nextLine().trim();
+            try{
+                if (args.length > 1){
+                    filePath = args[1];
+                }else {
+                    System.out.println("Введите путь к файлу: ");
+                    //        String filePath = "src\\main\\java\\files\\script.txt";
+                    filePath = scanner.nextLine().trim();
+                }
+            }catch (Exception e){
+                System.out.println("Ошибка");
+            }
+
             if (!new java.io.File(filePath).exists()) {
                 System.out.println("Файл не найден: " + filePath);
                 continue;
