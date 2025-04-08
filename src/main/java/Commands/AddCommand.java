@@ -15,15 +15,9 @@ public class AddCommand implements Command{
 
     @Override
     public LinkedHashMap<Object, Object> execute(String[] args) {
-
         InputProvider inputProvider = new KeyboardInputProvider();
         Route rn = new Route();
         inputObject.inputObject(rn, inputProvider);
         return null;
     }
-
-
-
-
-
 }

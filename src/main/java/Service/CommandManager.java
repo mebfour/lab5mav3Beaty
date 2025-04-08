@@ -1,8 +1,9 @@
 package Service;
 
 import Commands.*;
-import Commands.XmlProcessing.ExecuteScript;
+import Commands.ForScript.ExecuteScript;
 import Commands.XmlProcessing.SaveCommand;
+import InputHandler.InputProvider;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -41,10 +42,6 @@ public class CommandManager {
             }else {
                 System.out.println("Такой команды нет, давайте попробуем другой набор символов");
             }
-
-
     }
-
-
 }
 

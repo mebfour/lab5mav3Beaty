@@ -1,8 +1,7 @@
-
 add
-name
+scr2
 3
-4 
+4
 mesto1
 4
 5
@@ -16,7 +15,7 @@ updateId
 0
 nameNew
 3
-4 
+4
 mesto1
 4
 5
@@ -26,5 +25,3 @@ mesto2
 8
 9
 345
-show
-execute_script script2.txt
